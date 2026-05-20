@@ -1,6 +1,6 @@
-package dev.rinchan.sixattributes.api;
+package dev.rinchan.dndsixattributes.api;
 
-import dev.rinchan.sixattributes.SixAttributes;
+import dev.rinchan.dndsixattributes.DndSixAttributes;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,17 +21,17 @@ public final class SixAttributeRegistry {
             return;
         }
         defaultsRegistered = true;
-        register(new SixAttribute(SixAttributes.STRENGTH, 10, 0, 20, 0));
-        register(new SixAttribute(SixAttributes.DEXTERITY, 10, 0, 20, 10));
-        register(new SixAttribute(SixAttributes.CONSTITUTION, 10, 0, 20, 20));
-        register(new SixAttribute(SixAttributes.INTELLIGENCE, 10, 0, 20, 30));
-        register(new SixAttribute(SixAttributes.WISDOM, 10, 0, 20, 40));
-        register(new SixAttribute(SixAttributes.CHARISMA, 10, 0, 20, 50));
+        register(new SixAttribute(DndSixAttributes.STRENGTH, 10, 0, 20, 0));
+        register(new SixAttribute(DndSixAttributes.DEXTERITY, 10, 0, 20, 10));
+        register(new SixAttribute(DndSixAttributes.CONSTITUTION, 10, 0, 20, 20));
+        register(new SixAttribute(DndSixAttributes.INTELLIGENCE, 10, 0, 20, 30));
+        register(new SixAttribute(DndSixAttributes.WISDOM, 10, 0, 20, 40));
+        register(new SixAttribute(DndSixAttributes.CHARISMA, 10, 0, 20, 50));
     }
 
     public static synchronized SixAttribute register(SixAttribute attribute) {
         if (ATTRIBUTES.containsKey(attribute.id())) {
-            throw new IllegalArgumentException("Duplicate Six Attributes id: " + attribute.id());
+            throw new IllegalArgumentException("Duplicate DnD Six Attributes id: " + attribute.id());
         }
         ATTRIBUTES.put(attribute.id(), attribute);
         return attribute;

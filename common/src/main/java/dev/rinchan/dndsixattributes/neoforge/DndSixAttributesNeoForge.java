@@ -1,15 +1,15 @@
-package dev.rinchan.sixattributes.neoforge;
+package dev.rinchan.dndsixattributes.neoforge;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import dev.rinchan.sixattributes.SixAttributeData;
-import dev.rinchan.sixattributes.SixAttributeEffects;
-import dev.rinchan.sixattributes.SixAttributes;
-import dev.rinchan.sixattributes.SixAttributesAdjustPacket;
-import dev.rinchan.sixattributes.SixAttributesNetworking;
-import dev.rinchan.sixattributes.SixAttributesSyncPacket;
-import dev.rinchan.sixattributes.api.SixAttributeRegistry;
-import dev.rinchan.sixattributes.client.SixAttributesClient;
-import dev.rinchan.sixattributes.client.SixAttributesClientState;
+import dev.rinchan.dndsixattributes.SixAttributeData;
+import dev.rinchan.dndsixattributes.SixAttributeEffects;
+import dev.rinchan.dndsixattributes.DndSixAttributes;
+import dev.rinchan.dndsixattributes.DndSixAttributesAdjustPacket;
+import dev.rinchan.dndsixattributes.DndSixAttributesNetworking;
+import dev.rinchan.dndsixattributes.DndSixAttributesSyncPacket;
+import dev.rinchan.dndsixattributes.api.SixAttributeRegistry;
+import dev.rinchan.dndsixattributes.client.DndSixAttributesClient;
+import dev.rinchan.dndsixattributes.client.DndSixAttributesClientState;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.resources.ResourceLocation;
@@ -26,10 +26,10 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-@Mod(SixAttributes.MOD_ID)
-public class SixAttributesNeoForge {
-    public SixAttributesNeoForge(IEventBus modBus) {
-        SixAttributes.init();
+@Mod(DndSixAttributes.MOD_ID)
+public class DndSixAttributesNeoForge {
+    public DndSixAttributesNeoForge(IEventBus modBus) {
+        DndSixAttributes.init();
         modBus.addListener(this::registerPayloads);
         NeoForge.EVENT_BUS.addListener(this::onPlayerLogin);
         NeoForge.EVENT_BUS.addListener(this::onPlayerClone);
@@ -37,20 +37,20 @@ public class SixAttributesNeoForge {
         NeoForge.EVENT_BUS.addListener(this::onIncomingDamage);
         NeoForge.EVENT_BUS.addListener(this::onRegisterCommands);
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            SixAttributesClient.register();
+            DndSixAttributesClient.register();
         }
     }
 
     private void registerPayloads(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1").optional();
-        registrar.playToClient(SixAttributesSyncPacket.TYPE, SixAttributesSyncPacket.CODEC, (packet, context) -> context.enqueueWork(() -> SixAttributesClientState.apply(packet)).exceptionally(throwable -> null));
-        registrar.playToServer(SixAttributesAdjustPacket.TYPE, SixAttributesAdjustPacket.CODEC, (packet, context) -> context.enqueueWork(() -> {
+        registrar.playToClient(DndSixAttributesSyncPacket.TYPE, DndSixAttributesSyncPacket.CODEC, (packet, context) -> context.enqueueWork(() -> DndSixAttributesClientState.apply(packet)).exceptionally(throwable -> null));
+        registrar.playToServer(DndSixAttributesAdjustPacket.TYPE, DndSixAttributesAdjustPacket.CODEC, (packet, context) -> context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer player && Math.abs(packet.delta()) == 1) {
                 SixAttributeData data = SixAttributeData.get(player);
                 if (data.adjust(packet.attributeId(), packet.delta())) {
                     SixAttributeData.set(player, data);
                     SixAttributeEffects.apply(player);
-                    SixAttributesNetworking.sync(player);
+                    DndSixAttributesNetworking.sync(player);
                 }
             }
         }).exceptionally(throwable -> null));
@@ -59,7 +59,7 @@ public class SixAttributesNeoForge {
     private void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             SixAttributeEffects.apply(player);
-            SixAttributesNetworking.sync(player);
+            DndSixAttributesNetworking.sync(player);
         }
     }
 
@@ -67,7 +67,7 @@ public class SixAttributesNeoForge {
         if (event.getEntity() instanceof ServerPlayer player) {
             SixAttributeData.set(player, SixAttributeData.get(event.getOriginal()));
             SixAttributeEffects.apply(player);
-            SixAttributesNetworking.sync(player);
+            DndSixAttributesNetworking.sync(player);
         }
     }
 
@@ -82,7 +82,7 @@ public class SixAttributesNeoForge {
     }
 
     private void onRegisterCommands(RegisterCommandsEvent event) {
-        event.getDispatcher().register(Commands.literal("sixattributes")
+        event.getDispatcher().register(Commands.literal("dndsixattributes")
             .requires(source -> source.hasPermission(2))
             .then(Commands.literal("points")
                 .then(Commands.argument("targets", EntityArgument.players())
@@ -93,7 +93,7 @@ public class SixAttributesNeoForge {
                                 SixAttributeData data = SixAttributeData.get(player);
                                 data.setAvailablePoints(amount);
                                 SixAttributeData.set(player, data);
-                                SixAttributesNetworking.sync(player);
+                                DndSixAttributesNetworking.sync(player);
                             }
                             return 1;
                         }))))
@@ -118,7 +118,7 @@ public class SixAttributesNeoForge {
                                 }
                                 SixAttributeData.set(player, data);
                                 SixAttributeEffects.apply(player);
-                                SixAttributesNetworking.sync(player);
+                                DndSixAttributesNetworking.sync(player);
                                 return 1;
                             }))))));
     }

@@ -1,4 +1,4 @@
-package dev.rinchan.sixattributes.api;
+package dev.rinchan.dndsixattributes.api;
 
 import net.minecraft.resources.ResourceLocation;
 

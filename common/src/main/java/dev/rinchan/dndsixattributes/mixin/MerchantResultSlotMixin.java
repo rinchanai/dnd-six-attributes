@@ -1,6 +1,6 @@
-package dev.rinchan.sixattributes.mixin;
+package dev.rinchan.dndsixattributes.mixin;
 
-import dev.rinchan.sixattributes.SixAttributesTradeContext;
+import dev.rinchan.dndsixattributes.DndSixAttributesTradeContext;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MerchantResultSlot;
 import net.minecraft.world.item.ItemStack;
@@ -13,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MerchantResultSlotMixin {
     @Inject(method = "onTake", at = @At("HEAD"))
     private void sixAttributes$pushTakingPlayer(Player player, ItemStack stack, CallbackInfo ci) {
-        SixAttributesTradeContext.push(player);
+        DndSixAttributesTradeContext.push(player);
     }
 
     @Inject(method = "onTake", at = @At("RETURN"))
     private void sixAttributes$clearTakingPlayer(Player player, ItemStack stack, CallbackInfo ci) {
-        SixAttributesTradeContext.clear();
+        DndSixAttributesTradeContext.clear();
     }
 }

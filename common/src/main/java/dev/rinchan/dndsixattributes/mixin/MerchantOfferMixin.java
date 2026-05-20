@@ -1,6 +1,6 @@
-package dev.rinchan.sixattributes.mixin;
+package dev.rinchan.dndsixattributes.mixin;
 
-import dev.rinchan.sixattributes.SixAttributesTradeContext;
+import dev.rinchan.dndsixattributes.DndSixAttributesTradeContext;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MerchantOfferMixin {
     @Inject(method = "getModifiedCostCount", at = @At("RETURN"), cancellable = true)
     private void sixAttributes$adjustCharismaPrice(ItemCost cost, CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(SixAttributesTradeContext.adjustCost(SixAttributesTradeContext.currentPlayer(), cir.getReturnValueI()));
+        cir.setReturnValue(DndSixAttributesTradeContext.adjustCost(DndSixAttributesTradeContext.currentPlayer(), cir.getReturnValueI()));
     }
 }

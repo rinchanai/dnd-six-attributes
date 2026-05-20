@@ -1,21 +1,21 @@
-package dev.rinchan.sixattributes.client;
+package dev.rinchan.dndsixattributes.client;
 
-import dev.rinchan.sixattributes.SixAttributeData;
-import dev.rinchan.sixattributes.SixAttributesSyncPacket;
+import dev.rinchan.dndsixattributes.SixAttributeData;
+import dev.rinchan.dndsixattributes.DndSixAttributesSyncPacket;
 import java.util.Map;
 import net.minecraft.resources.ResourceLocation;
 
-public final class SixAttributesClientState {
+public final class DndSixAttributesClientState {
     private static SixAttributeData data = new SixAttributeData();
 
-    private SixAttributesClientState() {
+    private DndSixAttributesClientState() {
     }
 
     public static SixAttributeData data() {
         return data;
     }
 
-    public static void apply(SixAttributesSyncPacket packet) {
+    public static void apply(DndSixAttributesSyncPacket packet) {
         SixAttributeData next = new SixAttributeData();
         next.setAvailablePoints(packet.availablePoints());
         for (Map.Entry<ResourceLocation, Integer> entry : packet.allocated().entrySet()) {

@@ -1,11 +1,11 @@
-package dev.rinchan.sixattributes;
+package dev.rinchan.dndsixattributes;
 
 import net.minecraft.world.entity.player.Player;
 
-public final class SixAttributesTradeContext {
+public final class DndSixAttributesTradeContext {
     private static final ThreadLocal<Player> CURRENT_PLAYER = new ThreadLocal<>();
 
-    private SixAttributesTradeContext() {
+    private DndSixAttributesTradeContext() {
     }
 
     public static Player currentPlayer() {
@@ -24,8 +24,8 @@ public final class SixAttributesTradeContext {
         if (player == null || original <= 1) {
             return original;
         }
-        int charisma = SixAttributeData.get(player).value(SixAttributes.CHARISMA);
-        double bonus = SixAttributes.percentBonus(charisma);
+        int charisma = SixAttributeData.get(player).value(DndSixAttributes.CHARISMA);
+        double bonus = DndSixAttributes.percentBonus(charisma);
         int adjusted = (int)Math.ceil(original * (1.0D - bonus));
         return Math.max(1, adjusted);
     }

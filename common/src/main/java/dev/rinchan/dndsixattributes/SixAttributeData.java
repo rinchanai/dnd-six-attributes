@@ -1,7 +1,7 @@
-package dev.rinchan.sixattributes;
+package dev.rinchan.dndsixattributes;
 
-import dev.rinchan.sixattributes.api.SixAttribute;
-import dev.rinchan.sixattributes.api.SixAttributeRegistry;
+import dev.rinchan.dndsixattributes.api.SixAttribute;
+import dev.rinchan.dndsixattributes.api.SixAttributeRegistry;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import net.minecraft.nbt.CompoundTag;
@@ -10,7 +10,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 
 public final class SixAttributeData {
-    private static final String ROOT_KEY = "SixAttributes";
+    private static final String ROOT_KEY = "DndSixAttributes";
     private static final String POINTS_KEY = "AvailablePoints";
     private static final String ALLOCATED_KEY = "Allocated";
 

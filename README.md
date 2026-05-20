@@ -1,6 +1,6 @@
-# Six Attributes
+# DnD Six Attributes
 
-Six Attributes adds a lightweight DnD-style attribute sheet for Minecraft players.
+DnD Six Attributes adds a lightweight DnD-style attribute sheet for Minecraft players.
 
 ## First-pass features
 

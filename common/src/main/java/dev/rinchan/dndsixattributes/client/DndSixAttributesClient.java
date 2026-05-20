@@ -1,6 +1,6 @@
-package dev.rinchan.sixattributes.client;
+package dev.rinchan.dndsixattributes.client;
 
-import dev.rinchan.sixattributes.SixAttributes;
+import dev.rinchan.dndsixattributes.DndSixAttributes;
 import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.client.Minecraft;
@@ -12,24 +12,24 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.common.NeoForge;
 
-public final class SixAttributesClient {
+public final class DndSixAttributesClient {
     private static final Set<Integer> GLOWING_ENTITIES = new HashSet<>();
 
-    private SixAttributesClient() {
+    private DndSixAttributesClient() {
     }
 
     public static void register() {
-        NeoForge.EVENT_BUS.addListener(SixAttributesClient::onScreenInit);
-        NeoForge.EVENT_BUS.addListener(SixAttributesClient::onClientTick);
+        NeoForge.EVENT_BUS.addListener(DndSixAttributesClient::onScreenInit);
+        NeoForge.EVENT_BUS.addListener(DndSixAttributesClient::onClientTick);
     }
 
     private static void onScreenInit(ScreenEvent.Init.Post event) {
         if (event.getScreen() instanceof InventoryScreen screen) {
             int x = screen.width / 2 + 75;
             int y = screen.height / 2 - 86;
-            event.addListener(Button.builder(Component.literal("◈"), button -> Minecraft.getInstance().setScreen(new SixAttributesScreen()))
+            event.addListener(Button.builder(Component.literal("◈"), button -> Minecraft.getInstance().setScreen(new DndSixAttributesScreen()))
                 .bounds(x, y, 20, 20)
-                .tooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("screen.six_attributes.open")))
+                .tooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("screen.dnd_six_attributes.open")))
                 .build());
         }
     }
@@ -40,7 +40,7 @@ public final class SixAttributesClient {
             clearGlowing(minecraft);
             return;
         }
-        int wisdom = SixAttributesClientState.data().value(SixAttributes.WISDOM);
+        int wisdom = DndSixAttributesClientState.data().value(DndSixAttributes.WISDOM);
         double range = Math.max(0, (wisdom - 10) * 2.0D);
         Set<Integer> next = new HashSet<>();
         if (range > 0) {

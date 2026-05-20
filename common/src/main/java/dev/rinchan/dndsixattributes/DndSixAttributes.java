@@ -1,10 +1,10 @@
-package dev.rinchan.sixattributes;
+package dev.rinchan.dndsixattributes;
 
-import dev.rinchan.sixattributes.api.SixAttributeRegistry;
+import dev.rinchan.dndsixattributes.api.SixAttributeRegistry;
 import net.minecraft.resources.ResourceLocation;
 
-public final class SixAttributes {
-    public static final String MOD_ID = "six_attributes";
+public final class DndSixAttributes {
+    public static final String MOD_ID = "dnd_six_attributes";
 
     public static final ResourceLocation STRENGTH = id("strength");
     public static final ResourceLocation DEXTERITY = id("dexterity");
@@ -13,7 +13,7 @@ public final class SixAttributes {
     public static final ResourceLocation WISDOM = id("wisdom");
     public static final ResourceLocation CHARISMA = id("charisma");
 
-    private SixAttributes() {
+    private DndSixAttributes() {
     }
 
     public static void init() {

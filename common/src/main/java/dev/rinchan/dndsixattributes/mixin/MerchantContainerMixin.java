@@ -1,6 +1,6 @@
-package dev.rinchan.sixattributes.mixin;
+package dev.rinchan.dndsixattributes.mixin;
 
-import dev.rinchan.sixattributes.SixAttributesTradeContext;
+import dev.rinchan.dndsixattributes.DndSixAttributesTradeContext;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MerchantContainer;
 import net.minecraft.world.item.trading.Merchant;
@@ -19,12 +19,12 @@ public abstract class MerchantContainerMixin {
     private void sixAttributes$pushTradingPlayer(CallbackInfo ci) {
         Player player = merchant.getTradingPlayer();
         if (player != null) {
-            SixAttributesTradeContext.push(player);
+            DndSixAttributesTradeContext.push(player);
         }
     }
 
     @Inject(method = "updateSellItem", at = @At("RETURN"))
     private void sixAttributes$clearTradingPlayer(CallbackInfo ci) {
-        SixAttributesTradeContext.clear();
+        DndSixAttributesTradeContext.clear();
     }
 }

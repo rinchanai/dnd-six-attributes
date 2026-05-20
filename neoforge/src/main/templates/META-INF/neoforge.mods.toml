@@ -10,7 +10,7 @@ authors="${mod_authors}"
 description='''${mod_description}'''
 
 [[mixins]]
-config = "six_attributes.mixins.json"
+config = "dnd_six_attributes.mixins.json"
 
 [[dependencies.${mod_id}]]
 modId="neoforge"
