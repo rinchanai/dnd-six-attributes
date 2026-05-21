@@ -2,6 +2,9 @@
 
 DnD Six Attributes adds a lightweight DnD-style attribute sheet for Minecraft players.
 
+- GitHub: https://github.com/rinchanai/dnd-six-attributes
+- Modrinth: https://modrinth.com/mod/dnd-six-attributes
+
 ## First-pass features
 
 - Inventory-screen entry button for the attribute sheet.
