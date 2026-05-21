@@ -9,6 +9,8 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class DndSixAttributesScreen extends Screen {
@@ -63,12 +65,7 @@ public class DndSixAttributesScreen extends Screen {
             int value = DndSixAttributesClientState.data().value(attribute.id());
             int allocated = DndSixAttributesClientState.data().allocated(attribute.id());
             double bonus = DndSixAttributes.percentBonus(value) * 100.0D;
-            ResourceLocation icon = iconTexture(attribute.id());
-            if (icon != null) {
-                graphics.blit(icon, x + 8, rowY + 4, 0, 0, 16, 16, 16, 16);
-            } else {
-                graphics.fill(x + 8, rowY + 4, x + 24, rowY + 20, 0xFFAAAAAA);
-            }
+            graphics.renderFakeItem(iconItem(attribute.id()), x + 8, rowY + 4);
             drawCentered(graphics, Component.translatable(attribute.translationKey()), x + 100, rowY + 8, 0xFFFFFF);
             drawCentered(graphics, Component.translatable("screen.dnd_six_attributes.value", value), x + 205, rowY + 8, 0xD6E6FF);
             drawCentered(graphics, Component.translatable("screen.dnd_six_attributes.allocated", allocated), x + 280, rowY + 8, 0xD6E6FF);
@@ -84,14 +81,14 @@ public class DndSixAttributesScreen extends Screen {
         graphics.drawString(font, text, centerX - font.width(text) / 2, y, color, false);
     }
 
-    private static ResourceLocation iconTexture(ResourceLocation id) {
-        if (id.equals(DndSixAttributes.STRENGTH)) return DndSixAttributes.id("textures/gui/stat/strength.png");
-        if (id.equals(DndSixAttributes.DEXTERITY)) return DndSixAttributes.id("textures/gui/stat/dexterity.png");
-        if (id.equals(DndSixAttributes.CONSTITUTION)) return DndSixAttributes.id("textures/gui/stat/constitution.png");
-        if (id.equals(DndSixAttributes.INTELLIGENCE)) return DndSixAttributes.id("textures/gui/stat/intelligence.png");
-        if (id.equals(DndSixAttributes.WISDOM)) return DndSixAttributes.id("textures/gui/stat/wisdom.png");
-        if (id.equals(DndSixAttributes.CHARISMA)) return DndSixAttributes.id("textures/gui/stat/charisma.png");
-        return null;
+    private static ItemStack iconItem(ResourceLocation id) {
+        if (id.equals(DndSixAttributes.STRENGTH)) return new ItemStack(Items.IRON_SWORD);
+        if (id.equals(DndSixAttributes.DEXTERITY)) return new ItemStack(Items.FEATHER);
+        if (id.equals(DndSixAttributes.CONSTITUTION)) return new ItemStack(Items.GOLDEN_APPLE);
+        if (id.equals(DndSixAttributes.INTELLIGENCE)) return new ItemStack(Items.BOOK);
+        if (id.equals(DndSixAttributes.WISDOM)) return new ItemStack(Items.ENDER_EYE);
+        if (id.equals(DndSixAttributes.CHARISMA)) return new ItemStack(Items.EMERALD);
+        return new ItemStack(Items.PAPER);
     }
 
     @Override
