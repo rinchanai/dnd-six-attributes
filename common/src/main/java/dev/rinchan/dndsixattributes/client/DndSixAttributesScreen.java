@@ -41,8 +41,6 @@ public class DndSixAttributesScreen extends Screen {
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics, mouseX, mouseY, partialTick);
-        graphics.drawCenteredString(font, title, width / 2, 16, 0xFFFFFF);
-        graphics.drawCenteredString(font, Component.translatable("screen.dnd_six_attributes.points", DndSixAttributesClientState.data().availablePoints()), width / 2, 30, 0xFFE082);
 
         int panelWidth = 300;
         int x = (width - panelWidth) / 2;
@@ -50,20 +48,30 @@ public class DndSixAttributesScreen extends Screen {
         int row = 0;
         for (var attribute : SixAttributeRegistry.all()) {
             int rowY = y + row * ROW_HEIGHT;
+            graphics.fill(x, rowY, x + panelWidth - 48, rowY + 24, 0x66000000);
+            row++;
+        }
+
+        super.render(graphics, mouseX, mouseY, partialTick);
+
+        graphics.drawCenteredString(font, title, width / 2, 16, 0xFFFFFF);
+        graphics.drawCenteredString(font, Component.translatable("screen.dnd_six_attributes.points", DndSixAttributesClientState.data().availablePoints()), width / 2, 30, 0xFFE082);
+
+        row = 0;
+        for (var attribute : SixAttributeRegistry.all()) {
+            int rowY = y + row * ROW_HEIGHT;
             int value = DndSixAttributesClientState.data().value(attribute.id());
             int allocated = DndSixAttributesClientState.data().allocated(attribute.id());
             double bonus = DndSixAttributes.percentBonus(value) * 100.0D;
-            graphics.fill(x, rowY, x + panelWidth, rowY + 24, 0x66000000);
             graphics.fill(x + 4, rowY + 4, x + 20, rowY + 20, iconColor(attribute.id()));
             graphics.drawString(font, Component.translatable(attribute.translationKey()), x + 26, rowY + 4, 0xFFFFFF, false);
             graphics.drawString(font, Component.translatable("screen.dnd_six_attributes.value_allocated", value, allocated), x + 112, rowY + 4, 0xD6E6FF, false);
             graphics.drawString(font, Component.literal(String.format("%+.0f%%", bonus)).withStyle(bonus >= 0 ? ChatFormatting.GREEN : ChatFormatting.RED), x + 205, rowY + 4, 0xFFFFFF, false);
-            if (mouseX >= x && mouseX <= x + panelWidth - 48 && mouseY >= rowY && mouseY <= rowY + 24) {
+            if (!Boolean.getBoolean("dndSixAttributes.screenshot") && mouseX >= x && mouseX <= x + panelWidth - 48 && mouseY >= rowY && mouseY <= rowY + 24) {
                 graphics.renderTooltip(font, Component.translatable(attribute.effectKey()), mouseX, mouseY);
             }
             row++;
         }
-        super.render(graphics, mouseX, mouseY, partialTick);
     }
 
     private static int iconColor(ResourceLocation id) {

@@ -2,7 +2,7 @@
   "screen.dnd_six_attributes.title": "六维属性",
   "screen.dnd_six_attributes.open": "打开六维属性",
   "screen.dnd_six_attributes.points": "可分配点数：%s",
-  "screen.dnd_six_attributes.value_allocated": "当前：%s  已分配：+%s",
+  "screen.dnd_six_attributes.value_allocated": "当前：%s  +%s",
   "attribute.dnd_six_attributes.strength": "力量",
   "attribute.dnd_six_attributes.strength.effect": "加到原版攻击伤害属性层内。20 = 近战伤害数值 +20%，0 = -20%。",
   "attribute.dnd_six_attributes.dexterity": "敏捷",

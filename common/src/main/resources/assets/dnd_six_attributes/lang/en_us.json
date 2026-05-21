@@ -2,7 +2,7 @@
   "screen.dnd_six_attributes.title": "DnD Six Attributes",
   "screen.dnd_six_attributes.open": "Open DnD Six Attributes",
   "screen.dnd_six_attributes.points": "Available points: %s",
-  "screen.dnd_six_attributes.value_allocated": "Value: %s  Allocated: +%s",
+  "screen.dnd_six_attributes.value_allocated": "Value: %s  +%s",
   "attribute.dnd_six_attributes.strength": "Strength",
   "attribute.dnd_six_attributes.strength.effect": "Adds melee damage inside the vanilla attack-damage attribute layer. 20 = +20% melee damage value, 0 = -20%.",
   "attribute.dnd_six_attributes.dexterity": "Dexterity",

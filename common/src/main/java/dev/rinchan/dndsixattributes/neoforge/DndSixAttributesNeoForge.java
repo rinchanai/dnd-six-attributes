@@ -38,6 +38,9 @@ public class DndSixAttributesNeoForge {
         NeoForge.EVENT_BUS.addListener(this::onRegisterCommands);
         if (FMLEnvironment.dist == Dist.CLIENT) {
             DndSixAttributesClient.register();
+            if (Boolean.getBoolean("dndSixAttributes.screenshot")) {
+                dev.rinchan.dndsixattributes.client.DndSixAttributesScreenshotHarness.register();
+            }
         }
     }
 
