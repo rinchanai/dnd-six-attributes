@@ -26,11 +26,7 @@ public final class DndSixAttributesClient {
 
     private static void onScreenInit(ScreenEvent.Init.Post event) {
         if (event.getScreen() instanceof InventoryScreen screen) {
-            int inventoryLeft = screen.getGuiLeft();
-            int inventoryTop = screen.getGuiTop();
-            int x = inventoryLeft + 72;
-            int y = inventoryTop + 54;
-            AttributeIconButton button = new AttributeIconButton(x, y, 12, 12, 13, ATTRIBUTE_BUTTON, 12, 25, ignored -> Minecraft.getInstance().setScreen(new DndSixAttributesScreen()), net.minecraft.network.chat.Component.translatable("screen.dnd_six_attributes.open"));
+            AttributeIconButton button = new AttributeIconButton(screen, -13, 56, 14, 18, 19, ATTRIBUTE_BUTTON, 14, 37, ignored -> Minecraft.getInstance().setScreen(new DndSixAttributesScreen()), net.minecraft.network.chat.Component.translatable("screen.dnd_six_attributes.open"));
             button.setTooltip(Tooltip.create(net.minecraft.network.chat.Component.translatable("screen.dnd_six_attributes.open")));
             event.addListener(button);
         }
